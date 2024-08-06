@@ -53,6 +53,8 @@ app:
         secretKeyRef:
           name: app-env-secrets
           key: PUSHER_APP_SECRET
+    - name: SOKETI_AUTHENTICATION_ENABLED
+      value: "true"       
 
   # Extra volumes to mount on the container.
   extraVolumeMounts: []
