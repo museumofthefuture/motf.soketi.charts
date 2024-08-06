@@ -12,9 +12,12 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: 6001
+      targetPort: {{ .Values.service.port }}
       protocol: TCP
       name: soketi
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{- end }}
   selector:
     {{- include "soketi.selectorLabels" . | nindent 4 }}
     {{- if .Values.networkWatcher.enabled }}
