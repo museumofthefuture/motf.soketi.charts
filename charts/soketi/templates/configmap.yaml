@@ -17,7 +17,14 @@ data:
             {
               "id": "{{ .id }}",
               "key": "{{ .key }}",
-              "secret": "{{ .secret }}"
+              "secret": "{{ .secret }}",
+              "maxConnections": -1,
+              "enableClientMessages": false,
+              "enabled": {{ .enabled | default true }},
+              "maxBackendEventsPerSecond": -1,
+              "maxClientEventsPerSecond": -1,
+              "maxReadRequestsPerSecond": -1,
+              "webhooks": []
             }{{ if not (eq (index $.Values.soketi.config.apps (sub (len $.Values.soketi.config.apps) 1)).id .id) }},{{ end }}
             {{- end }}
           ]
