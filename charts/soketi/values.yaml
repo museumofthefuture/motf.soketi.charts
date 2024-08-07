@@ -38,25 +38,12 @@ app:
 
   # Add extra env to the soketi container.
   extraEnv:
-    - name: SOKETI_DEFAULT_APP_ID
-      valueFrom:
-        secretKeyRef:
-          name: app-env-secrets
-          key: PUSHER_APP_ID
-    - name: SOKETI_DEFAULT_APP_KEY
-      valueFrom:
-        secretKeyRef:
-          name: app-env-secrets
-          key: PUSHER_APP_KEY
-    - name: SOKETI_DEFAULT_APP_SECRET
-      valueFrom:
-        secretKeyRef:
-          name: app-env-secrets
-          key: PUSHER_APP_SECRET
     - name: SOKETI_AUTHENTICATION_ENABLED
       value: "true"
     - name: SOKETI_DEBUG
       value: "true"     
+    - name: SOKETI_APP_MANAGER_DRIVER
+      value: "array"  
 
   # Extra volumes to mount on the container.
   extraVolumeMounts: []
