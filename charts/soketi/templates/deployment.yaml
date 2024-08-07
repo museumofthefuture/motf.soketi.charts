@@ -24,6 +24,10 @@ spec:
       labels:
         {{- include "soketi.selectorLabels" . | nindent 8 }}
     spec:
+      volumes:
+        - name: soketi-config
+          configMap:
+            name: soketi-config
       {{- with .Values.extraVolumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
@@ -94,10 +98,10 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.app.image.pullPolicy }}
-          {{- with .Values.app.extraVolumeMounts }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
+            - name: soketi-config
+              mountPath: /etc/soketi
+              subPath: config.json
           ports:
             - name: soketi
               containerPort: 6001
@@ -108,13 +112,14 @@ spec:
             - name: cluster
               containerPort: 11002
               protocol: UDP
-          command: 
-            {{- toYaml .Values.app.command | nindent 12 }}
+          command: ["soketi", "start", "--config=/etc/soketi/config.json"]
           env:
             - name: SOKETI_PORT
               value: "6001"
             - name: SOKETI_MODE
               value: {{ .Values.app.mode | default "full" }}
+            - name: SOKETI_CONFIG_FILE
+              value: /etc/soketi/config.json
             {{- with .Values.app.extraEnv }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
