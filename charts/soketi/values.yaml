@@ -34,6 +34,7 @@ app:
     - --optimize_for_size
     - --optimize-for-size
     - /app/bin/server.js
+    - soketi
     - start
     - --config=/etc/soketi/config.json
 
@@ -47,7 +48,10 @@ app:
     #   value: "array"  
 
   # Extra volumes to mount on the container.
-  extraVolumeMounts: []
+  extraVolumeMounts:
+    - name: soketi-config
+      mountPath: /etc/soketi/config.json
+      subPath: config.json
   # - name: some-folder
   #   mountPath: /some/path
 
@@ -356,7 +360,11 @@ tolerations: []
 affinity: {}
 
 # Extra volumes to attach to the deployment.
-extraVolumes: []
+extraVolumes:
+  - name: soketi-config
+    hostPath:
+      path: /opt/motf/soketi/etc/soketi/config.json
+      type: File
 # - name: some-folder
 #   emptyDir: {}
 
