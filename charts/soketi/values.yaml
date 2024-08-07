@@ -85,6 +85,19 @@ app:
     hostNetwork: true
     dnsPolicy: ClusterFirstWithHostNet
 
+soketi:
+  config:
+    apps:
+      - id: motf-web-staging
+        key: stg-f93j4f8j3f94jf83j4f
+        secret: 2b4b2d1e9f5f5c4f4f7b34d8a9e3e4c2d3
+        enabled: true
+      - id: motf-web-prod
+        key: prod-9f8j4g8j9g4j9g4j9g4j
+        secret: 13e8d3c2a7f6f5e43d3c2a7f6e5d4c3b2a3
+        enabled: true
+    debug: true
+
 # The Network Watcher is watching for container maximum allocated
 # resources and once a specific threshold is exceeded, it will tell the
 # soketi server to stop accepting new connections by marking the Pod

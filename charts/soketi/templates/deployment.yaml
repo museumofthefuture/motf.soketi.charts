@@ -24,6 +24,10 @@ spec:
       labels:
         {{- include "soketi.selectorLabels" . | nindent 8 }}
     spec:
+      volumes:
+        - name: soketi-config
+          configMap:
+            name: soketi-config
       {{- with .Values.extraVolumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
@@ -117,6 +121,8 @@ spec:
               value: "6001"
             - name: SOKETI_MODE
               value: {{ .Values.app.mode | default "full" }}
+            - name: SOKETI_CONFIG_FILE
+              value: /app/config/config.json
             {{- with .Values.app.extraEnv }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
