@@ -101,6 +101,9 @@ spec:
           {{- with .Values.app.extraVolumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
+            - name: soketi-config
+              mountPath: /app/config
+              subPath: config.json
           {{- end }}
           ports:
             - name: soketi
@@ -112,10 +115,10 @@ spec:
             - name: cluster
               containerPort: 11002
               protocol: UDP
-          {{- with .Values.app.command }}
           command:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
+            - soketi
+            - start
+            - --config=/app/config/config.json
           env:
             - name: SOKETI_PORT
               value: "6001"
