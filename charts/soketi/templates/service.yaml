@@ -18,11 +18,13 @@ spec:
       {{- if eq .Values.service.type "NodePort" }}
       nodePort: {{ .Values.service.nodePort }}
       {{- end }}
-  selector:
-    {{- include "soketi.selectorLabels" . | nindent 4 }}
-    {{- if .Values.networkWatcher.enabled }}
-    ws.soketi.app/accepts-new-connections: "yes"
-    {{- end }}
+    - port: 9601
+      targetPort: 9601
+      protocol: TCP
+      name: metrics-server
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.metricsNodePort }}
+      {{- end }}
 ---
 apiVersion: v1
 kind: Service
