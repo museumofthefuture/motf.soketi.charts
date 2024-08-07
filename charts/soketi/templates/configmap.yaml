@@ -8,13 +8,19 @@ data:
     {
       "debug": {{ .Values.soketi.config.debug }},
       "port": 6001,
-      "appManager.array.apps": [
-        {{- range .Values.soketi.config.apps }}
-        {
-          "id": "{{ .id }}",
-          "key": "{{ .key }}",
-          "secret": "{{ .secret }}"
-        }{{ if not (eq (index $.Values.soketi.config.apps (sub (len $.Values.soketi.config.apps) 1)).id .id) }},{{ end }}
-        {{- end }}
-      ]
+      "appManager": {
+        "driver": "array",
+        "cache": { "enabled": false, "ttl": -1 },
+        "array": {
+          "apps": [
+            {{- range .Values.soketi.config.apps }}
+            {
+              "id": "{{ .id }}",
+              "key": "{{ .key }}",
+              "secret": "{{ .secret }}"
+            }{{ if not (eq (index $.Values.soketi.config.apps (sub (len $.Values.soketi.config.apps) 1)).id .id) }},{{ end }}
+            {{- end }}
+          ]
+        }
+      }
     }
