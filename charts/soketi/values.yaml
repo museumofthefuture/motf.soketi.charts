@@ -39,12 +39,12 @@ app:
 
   # Add extra env to the soketi container.
   extraEnv:
-    - name: SOKETI_AUTHENTICATION_ENABLED
-      value: "true"
-    - name: SOKETI_DEBUG
-      value: "true"     
-    - name: SOKETI_APP_MANAGER_DRIVER
-      value: "array"  
+    # - name: SOKETI_AUTHENTICATION_ENABLED
+    #   value: "true"
+    # - name: SOKETI_DEBUG
+    #   value: "true"     
+    # - name: SOKETI_APP_MANAGER_DRIVER
+    #   value: "array"  
 
   # Extra volumes to mount on the container.
   extraVolumeMounts: []
