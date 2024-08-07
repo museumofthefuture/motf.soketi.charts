@@ -108,7 +108,8 @@ spec:
             - name: cluster
               containerPort: 11002
               protocol: UDP
-          command: {{ toYaml .Values.app.command | nindent 12 }}
+          command: 
+            {{- toYaml .Values.app.command | nindent 12 }}
           env:
             - name: SOKETI_PORT
               value: "6001"
