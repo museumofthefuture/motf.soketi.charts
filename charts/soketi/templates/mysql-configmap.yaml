@@ -27,3 +27,5 @@ data:
       `enable_user_authentication` tinyint(1) NOT NULL,
       PRIMARY KEY (`id`)
     );
+    GRANT ALL PRIVILEGES ON *.* TO 'soketi'@'%' IDENTIFIED BY 'soketi';
+    FLUSH PRIVILEGES;
