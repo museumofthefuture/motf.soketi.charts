@@ -27,7 +27,12 @@ data:
       `enable_user_authentication` tinyint(1) NOT NULL,
       PRIMARY KEY (`id`)
     );
-    GRANT ALL PRIVILEGES ON *.* TO 'soketi'@'%' IDENTIFIED BY 'soketi';
-    ALTER USER 'soketi'@'%' IDENTIFIED WITH 'caching_sha2_password' BY 'soketi';
 
-    FLUSH PRIVILEGES
+    -- Create the user if it does not exist
+    CREATE USER IF NOT EXISTS 'soketi'@'%' IDENTIFIED BY '{{ .Values.mysql.password }}';
+
+    -- Grant privileges
+    GRANT ALL PRIVILEGES ON *.* TO 'soketi'@'%';
+
+    -- Ensure privileges are applied
+    FLUSH PRIVILEGES;
