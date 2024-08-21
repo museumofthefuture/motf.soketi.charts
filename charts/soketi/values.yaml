@@ -34,7 +34,7 @@ app:
     - --optimize_for_size
     - --optimize-for-size
     - /app/bin/server.js
-    # - start
+    - start
     # - --config=/etc/soketi/config.json
 
   # Add extra env to the soketi container.
