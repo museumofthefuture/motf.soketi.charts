@@ -41,10 +41,20 @@ app:
   extraEnv:
     # - name: SOKETI_AUTHENTICATION_ENABLED
     #   value: "true"
-    # - name: SOKETI_DEBUG
-    #   value: "true"     
-    # - name: SOKETI_APP_MANAGER_DRIVER
-    #   value: "array"  
+    - name: SOKETI_DEBUG
+      value: "true"     
+    - name: SOKETI_APP_MANAGER_DRIVER
+      value: "mysql"  
+    - name: SOKETI_DB_MYSQL_HOST
+      value: "soketi-db"
+    - name: SOKETI_DB_MYSQL_PORT
+      value: "3306"
+    - name: SOKETI_DB_MYSQL_DATABASE
+      value: "soketi"
+    - name: SOKETI_DB_MYSQL_USERNAME
+      value: "soketi"
+    - name: SOKETI_DB_MYSQL_PASSWORD
+      value: "soketi"
 
   # Extra volumes to mount on the container.
   extraVolumeMounts:
@@ -75,18 +85,27 @@ app:
     hostNetwork: true
     dnsPolicy: ClusterFirstWithHostNet
 
-soketi:
-  config:
-    apps:
-      - id: motf-web-staging
-        key: stg-f93j4f8j3f94jf83j4f
-        secret: 2b4b2d1e9f5f5c4f4f7b34d8a9e3e4c2d3
-        enabled: true
-      - id: motf-web-prod
-        key: prod-9f8j4g8j9g4j9g4j9g4j
-        secret: 13e8d3c2a7f6f5e43d3c2a7f6e5d4c3b2a3
-        enabled: true
-    debug: true
+mysql:
+  enabled: true
+  host: soketi-db
+  port: 3306
+  database: soketi
+  username: soketi
+  password: soketi
+  nodePort: 30036
+
+# soketi:
+#   config:
+#     apps:
+#       - id: motf-web-staging
+#         key: stg-f93j4f8j3f94jf83j4f
+#         secret: 2b4b2d1e9f5f5c4f4f7b34d8a9e3e4c2d3
+#         enabled: true
+#       - id: motf-web-prod
+#         key: prod-9f8j4g8j9g4j9g4j9g4j
+#         secret: 13e8d3c2a7f6f5e43d3c2a7f6e5d4c3b2a3
+#         enabled: true
+#     debug: true
 
 # The Network Watcher is watching for container maximum allocated
 # resources and once a specific threshold is exceeded, it will tell the
