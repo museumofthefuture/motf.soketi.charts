@@ -92,6 +92,7 @@ mysql:
   database: soketi
   username: soketi
   password: soketi
+  rootPassword: soketi
   nodePort: 30036
 
 # soketi:

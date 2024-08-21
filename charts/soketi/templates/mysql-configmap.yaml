@@ -28,4 +28,6 @@ data:
       PRIMARY KEY (`id`)
     );
     GRANT ALL PRIVILEGES ON *.* TO 'soketi'@'%' IDENTIFIED BY 'soketi';
-    FLUSH PRIVILEGES;
+    ALTER USER 'soketi'@'%' IDENTIFIED WITH 'caching_sha2_password' BY 'soketi';
+
+    FLUSH PRIVILEGES
