@@ -261,7 +261,7 @@ bullExporter:
   affinity: {}
 
 serviceMonitor:
-  enabled: true
+  enabled: false
   scrapeInterval: 5s
   scrapeTimeout: 3s
 
