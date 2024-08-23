@@ -11,6 +11,9 @@ data:
       http_listen_port: 9080
       grpc_listen_port: 0
 
+    positions:
+      filename: /run/promtail/positions.yaml
+
     clients:
       - url: http://{{ .Values.loki.endpoint }}/loki/api/v1/push
 
