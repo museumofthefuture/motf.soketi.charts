@@ -41,6 +41,8 @@ app:
   extraEnv:
     - name: SOKETI_METRICS_ENABLED
       value: "true"
+    - name: SOKETI_METRICS_SERVER_PORT
+      value: "9601"
     - name: SOKETI_DEBUG
       value: "true"     
     - name: SOKETI_APP_MANAGER_DRIVER
