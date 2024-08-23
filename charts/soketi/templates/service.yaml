@@ -18,6 +18,13 @@ spec:
       {{- if eq .Values.service.type "NodePort" }}
       nodePort: {{ .Values.service.nodePort }}
       {{- end }}
+    - port: {{ .Values.service.metricsPort }}
+      targetPort: {{ .Values.service.metricsPort }}
+      protocol: TCP
+      name: prometheus
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.metricsNodePort }}
+      {{- end }}  
   selector:
     {{- include "soketi.selectorLabels" . | nindent 4 }}
     {{- if .Values.networkWatcher.enabled }}
