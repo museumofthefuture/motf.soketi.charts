@@ -39,10 +39,8 @@ app:
 
   # Add extra env to the soketi container.
   extraEnv:
-    - name: SOKETI_DEFAULT_APP_MAX_CONNS
-      value: "1"
-    - name: SOKETI_METRICS_SERVER_HOST
-      value: "-1"  
+    - name: SOKETI_METRICS_ENABLED
+      value: "true"
     - name: SOKETI_METRICS_SERVER_PORT
       value: "9601"
     - name: SOKETI_DEBUG
