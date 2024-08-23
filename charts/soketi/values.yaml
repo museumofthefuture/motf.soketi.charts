@@ -40,7 +40,7 @@ app:
   # Add extra env to the soketi container.
   extraEnv:
     - name: SOKETI_METRICS_ENABLED
-      value: "1"
+      value: "true"
     - name: SOKETI_DEBUG
       value: "true"     
     - name: SOKETI_APP_MANAGER_DRIVER
@@ -113,7 +113,7 @@ mysql:
 # soketi server to stop accepting new connections by marking the Pod
 # as not ready. The existing connections will still be persisted.
 networkWatcher:
-  enabled: false
+  enabled: true
 
   image:
     repository: quay.io/soketi/network-watcher
