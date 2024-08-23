@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: promtail-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: promtail
+data:
+  promtail-config.yaml: |
+    server:
+      http_listen_port: 9080
+      grpc_listen_port: 0
+
+    positions:
+      filename: /run/promtail/positions.yaml
+
+    clients:
+      - url: http://{{ .Values.loki.endpoint }}/loki/api/v1/push
+
+    scrape_configs:
+      - job_name: soketi-logs
+        static_configs:
+          - targets:
+              - localhost
+            labels:
+              job: soketi
+              namespace: soketi
+              app: soketi-motf
+              __path__: /var/log/containers/*soketi*.log

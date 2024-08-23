@@ -394,3 +394,6 @@ extraContainers: []
 
 # Extra init containers to run in the deployment.
 extraInitContainers: []
+
+loki:
+  endpoint: "10.200.0.81:3100"
